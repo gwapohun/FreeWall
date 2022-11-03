@@ -1,0 +1,454 @@
+#:import ghex kivy.utils.get_color_from_hex
+
+# ===== Screen ( Wall Viewer )
+
+<WallViewer> :
+	nickname : nickname.__self__
+	search : search.__self__
+	refresh : refresh.__self__
+	most_likes : most_likes.__self__
+	most_dislikes : most_dislikes.__self__
+	feeds : feeds.__self__
+		
+	BoxLayout :
+		orientation : "vertical"
+		spacing : dp(5)
+		padding : dp(3)
+		
+		canvas.before :
+			Color :
+				rgb : 1 , 1 , 1#ghex("c9ccd1")
+			Rectangle :
+				pos : self.pos
+				size : self.size
+		
+		
+		# === Search Bar Container
+		BoxLayout :
+			size_hint : 1 , 0.06
+			spacing : dp(2)
+			padding : dp(2)
+						
+			# --- Search Input 
+			TextInput :
+				id : nickname
+				canvas.before :
+					Color :
+						rgb : ghex("714851")
+						a : 0.6
+					RoundedRectangle :
+						pos : self.pos
+						size : self.size
+						radius : [20]
+						
+				size_hint : 0.6 , 1
+				font_size : sp(22)
+				halign : "center"
+				valign : "center"
+				hint_text : "nickname"
+				font_name : "wall_font.ttf"
+				color : "black"
+				multiline : False
+				padding_y : dp(5)
+				background_down : ""
+		
+			# --- Search Button 
+			WallViewerButtons :
+				id : search
+				text : "search"
+				size_hint : 0.2 , 1
+			
+			# --- Show Other Wall Button 
+			WallViewerButtons :
+				id : refresh
+				size_hint : 0.2 , 1
+				text : "refresh"
+		
+		# === Highest Container
+		BoxLayout :
+			size_hint : 1 , 0.06
+			spacing : dp(2)
+			padding : dp(1)
+			
+			# --- Highest like Button 
+			WallViewerButtons :
+				id : most_likes
+				size_hint : 0.5 , 1
+				text : "most likes"
+			
+			# --- Highest Dislike Button 
+			WallViewerButtons :
+				id : most_dislikes
+				size_hint : 0.5 , 1
+				text : "most dislikes"
+			
+		# === Other Wall Container
+		ScrollView :
+			size_hint : 1 , 0.84
+			
+			canvas.before :
+				Color :
+					rgb : ghex("714851")
+				RoundedRectangle :
+					size : self.size
+					pos : self.pos
+					radius : [20]
+			
+			GridLayout :
+				id : feeds
+				cols : 1
+				size_hint : 1 , None
+				height : self.minimum_height 
+				padding : dp(10)
+				spacing : dp(5)
+				
+				WallContainer :
+					
+					
+
+# ==== Wall Cantainer
+<WallContainer> :
+	post : post.__self__
+	nickname : nickname.__self__
+	likes_button : likes_button.__self__
+	dislikes_button : dislikes_button.__self__
+	
+	orientation : "vertical"
+	size_hint : 1 , None
+	height : 800
+	
+	canvas.before :
+		Color :
+			#rgb : 1 , 1 , 1
+			rgb : ghex("f9fafc")
+		RoundedRectangle :
+			size : self.size
+			pos : self.pos
+			radius : [20]
+	
+	# ---- Post Container
+	Label :
+		id : post
+		size_hint : 1 , None
+		background_color : 1 , 1 , 1 , 0
+		height : 550
+		text_size : self.width - dp(10) , None
+		text : "Sana Maging Masaya Kayo Sa Pag-gamit Sa Aming Ginawang Application Ngayong Darating Na Pasko , Osmenian"
+		halign : "center"
+		font_name : "wall_font.ttf"
+		font_size : sp(20)
+		color : 0 , 0 , 0 , 1
+	
+	# ---- Nickname Container
+	BoxLayout :
+		size_hint : 1 , None
+		height : 150
+		
+		Label :
+		Label :
+			id : nickname
+			size_hint : None , 1
+			width : self.texture_size[0] + dp(30)
+			color : 0 , 0 , 0 , 1
+			halign : "center"
+			text : "- developers"
+			font_name : "wall_font.ttf"
+			font_size : sp(20)
+			
+	# ---- Activity Container
+	GridLayout :
+		size_hint : 1 , None
+		cols : 2
+		rows : 1
+		height : 100
+		spacing : dp(2)
+		
+		canvas.before :
+			Color :
+				rgb : ghex("c9ccd1")
+			RoundedRectangle :
+				size : self.size
+				pos : self.pos
+				radius : [20]
+			
+		LikesDislikesButton :
+			id : likes_button
+			text : "like 0"
+			
+		LikesDislikesButton :
+			id : dislikes_button
+			text : "dislike 0"
+			
+# ==== Likes And Dislikes Button
+<LikesDislikesButton> :
+	background_color : 1 , 1 , 1 , 0
+	halign : "center"
+	font_name : "wall_font.ttf"
+	font_size : sp(16)
+	color : "gray"
+
+# ===== Screen ( Profile )
+<MyProfile> :
+	refresh : refresh.__self__
+	nickname : nickname.__self__
+	post : post.__self__
+	likes : likes.__self__
+	dislikes : dislikes.__self__
+	
+	BoxLayout :
+		orientation : "vertical"
+		spacing : dp(5)
+		padding : dp(3)
+
+		# === Search Bar Container
+		ScrollView :
+			always_overscroll : False
+			size_hint : 1 , 0.94
+			
+			canvas.before :
+				Color :
+					rgb : ghex("714851")
+					a : 0.6
+				RoundedRectangle :
+					size : self.size
+					pos : self.pos
+					radius : [20]
+			
+			GridLayout :
+				cols : 1
+				size_hint : 1 , None
+				height : self.minimum_height 
+				padding : dp(10)
+				spacing : dp(5)
+				
+				# ---- Refresh Button
+				GridLayout :
+					size_hint : 1 , None
+					height : 100
+					cols : 2
+					
+					Label:
+					EditorButtons :
+						id : refresh
+						canvas.before :
+							Color :
+								rgb : ghex("7d4f59")
+							RoundedRectangle :
+								pos : self.pos
+								size : self.size
+								radius : [20,]
+								
+						size_hint : 0.35 , 1
+						background_color : 1 , 1 , 1 , 0
+						font_name : "wall_font.ttf"
+						font_size : sp(22)
+						text : "refresh"
+				
+				# ---- Nickname Container
+				Label :
+					id : nickname
+					size_hint : 1 , None
+					height : 200
+					background_color : 1 , 1 , 1 , 0
+					text : "developers"
+					font_name : "wall_font.ttf"
+					font_size : sp(28)
+					color : 0 ,0 ,0
+				
+				# ---- Post Container
+				Label :
+					id : post
+					canvas.before :
+						Color :
+							#rgb : 1 , 1 , 1
+							rgb : ghex("f9fafc")
+						RoundedRectangle :
+							size : self.size
+							pos : self.pos
+							radius : [20]
+							
+					size_hint : 1 , None
+					background_color : 1 , 1 , 1 , 0
+					height : 550
+					text_size : self.width - dp(10) , None
+					text : "Sana Maging Masaya Kayo Sa Pagamit Sa Aming Ginawang Application Ngayong Darating Na Pasko , Osmenian"
+					halign : "center"
+					font_name : "wall_font.ttf"
+					font_size : sp(20)
+					color : 0 , 0 , 0 , 1
+				
+				# ---- Likes And Dislikes Container
+				GridLayout :
+					size_hint : 1 , None
+					height : 120
+					cols : 2
+					spacing : dp(3)
+					
+					Label :
+						id : likes
+						canvas.before :
+							Color :
+								#rgb : 1 , 1 , 1
+								rgb : ghex("c9ccd1")
+							RoundedRectangle :
+								size : self.size
+								pos : self.pos
+								radius : [20]
+						
+						background_color : 0 ,0 ,0 ,0
+						text : "likes 0"
+						font_name : "wall_font.ttf"
+						font_size : sp(19)
+						color : 0 , 0 ,0
+					
+					Button :
+						id : dislikes
+						canvas.before :
+							Color :
+								#rgb : 1 , 1 , 1
+								rgb : ghex("c9ccd1")
+							RoundedRectangle :
+								size : self.size
+								pos : self.pos
+								radius : [20]
+						
+						background_color : 0 ,0 ,0 ,0
+						text : "dislikes 0"
+						font_name : "wall_font.ttf"
+						font_size : sp(19)
+						color : 0 , 0 ,0
+					
+
+# ==== Screen 3( Editor )
+<ProfileEditor> :
+	
+	
+	BoxLayout :
+		padding : dp(3)
+		
+		# === Search Bar Container
+		ScrollView :
+			always_overscroll : False
+			canvas.before :
+				Color :
+					rgb : ghex("714851")
+					a : 0.6
+				RoundedRectangle :
+					size : self.size
+					pos : self.pos
+					radius : [20]
+				
+			GridLayout :
+				cols : 1
+				size_hint : 1 , None
+				height : self.minimum_height 
+				padding : dp(15)
+				spacing : dp(20)
+				
+				# ------ Posting TextBox
+				BoxLayout :
+					orientation : "vertical"
+					size_hint : 1 , None
+					height : 500
+					padding : dp(2)
+					spacing : dp(5)
+					
+					# ------ Post TextBox
+					TextInput :
+						id : post_text
+						size_hint : 1 , None
+						height : 400
+						font_size : sp(20)
+						hint_text : "write your wall"
+						halign : "center"
+						valign : "center"
+						font_name : "wall_font.ttf"
+						color : "black"
+						multiline : True
+						padding : dp(7) , dp(10)
+						background_down : ""
+					
+					BoxLayout :
+						size_hint : 1 , None
+						height : 100
+						
+						Label :
+						EditorButtons :
+							id : post
+							canvas.before :
+								Color :
+									rgb : ghex("7d4f59")
+								RoundedRectangle :
+									pos : self.pos
+									size : self.size
+									radius : [20,]
+									
+							size_hint : None , 1
+							background_color : 0 , 0, 0, 0
+							width : 300
+							text : "P O S T"
+							font_name : "wall_font.ttf"
+							font_size : sp(20)
+						Label :
+							
+				# ------ IP Address & Port TextBox
+				BoxLayout :
+					orientation : "vertical"
+					size_hint : 1 , None
+					height : 250
+					padding : dp(1)
+					spacing : dp(1)
+					
+					Label :
+						size_hint : 1 , None
+						height : 150
+						text : "Enter The Current Address And Port"
+						color : ghex("714851")
+						font_name : "wall_font.ttf"
+						font_size : sp(18)
+						
+					BoxLayout :
+						size_hint : 1 , None
+						height : 100
+						padding : dp(2)
+						spacing : dp(5)
+							
+						TextInput :
+							id : addr
+							size_hint : 0.7 , 1
+							hint_text : "ex : 127.78.364.7"
+							halign : "center"
+							padding_y : sp(5)
+							font_size : sp(17)
+							font_name : "wall_font.ttf"
+							text : "0.tcp.ap.ngrok.io" #Debugging
+							
+						TextInput :
+							id : port
+							size_hint : 0.3 , 1
+							hint_text : "ex : 9038"
+							halign : "center"
+							padding_y : sp(5)
+							font_size : sp(17)
+							font_name : "wall_font.ttf"
+							text : "14064" # Debugging
+							
+				# ------ App Information
+				Label :
+					id : info
+					size_hint : 1 , None
+					text_size : self.width - dp(10) , None
+					height : self.texture_size[1]
+					padding_y : dp(5)
+					padding_x : dp(3)
+					font_size : sp(16)
+					color : 1 , 1 , 1 
+					font_name : "wall_font.ttf"
+					
+					canvas.before :
+						Color :
+							rgb : ghex("7d4f59")
+						RoundedRectangle :
+							pos : self.pos
+							size : self.size
+							radius : (20,)

@@ -1,0 +1,159 @@
+#:import ghex kivy.utils.get_color_from_hex
+#:import list_of_screens list_of_screens
+
+MainWidget:
+			
+	handler : handler.__self__
+	orientation : "vertical"
+	# === Title Bar
+	Label :
+		canvas.before :
+			Color :
+				rgba : ghex("714851")
+			Rectangle :
+				pos : self.pos
+				size : self.size
+					
+		size_hint : 1 , 0.08
+		markup : True
+		font_name : "wall_font.ttf"
+		font_size : sp(25)
+		text : str(handler.current).upper()
+			
+	# === Screen Container
+	ScreensHandler :
+		id : handler
+		size_hint : 1 , 0.84
+		
+		canvas.before :
+			Color :
+				rgba : 1 , 1 , 1 , 1
+			Rectangle :
+				pos : self.pos
+				size : self.size
+			
+	
+	# === Navigation Button
+	BoxLayout :
+		size_hint : 1 , 0.08
+		
+		NavigationButton :
+			text : "view"
+			color : "gray" if handler.current == "view" else ( 1 , 1 , 1)
+			on_release :
+				handler.transition.direction = "right"
+				handler.current = "view"
+			
+		NavigationButton :
+			text : "+"
+			color : "gray" if handler.current == "editor" else ( 1 , 1 , 1)
+			font_size : sp(35)
+			
+			on_release :
+				if handler.current == "view" : handler.transition.direction = "left"
+				if handler.current == "profile" : handler.transition.direction = "right"
+				handler.current = "editor"
+			
+		NavigationButton :
+			text : "profile"
+			color : "gray" if handler.current == "profile" else ( 1 , 1 , 1)
+			
+			on_release :
+				if handler.current != "profile" : handler.transition.direction = "left"
+				#if handler.current == "editor" : handler.transition.direction = "right"
+				handler.current = "profile"
+				
+
+<NavigationButton> :
+	background_color : 0 , 0 , 0 , 0
+	canvas.before :
+		Color :
+			rgba : ghex("714851")
+		Rectangle :
+			pos : self.pos
+			size : self.size
+	
+	font_name : "wall_font.ttf"
+	font_size : sp(23)
+
+# ===== Sign Up Pop Up
+<SignUp>:
+	join_button : join_button.__self__
+	info : info.__self__
+	nickname : nickname.__self__
+	addr : addr.__self__
+	port : port.__self__
+	
+	overlay_color : 0 , 0 , 0 , .2
+	size_hint : 0.8 , 0.4
+	auto_dismiss : False
+	
+	BoxLayout :
+		orientation : "vertical"
+		background_color : 0 , 0, 0 , 0
+		
+		canvas.before :
+			Color :
+				#rgb : 1 , 1 , 1#ghex("c9ccd1")
+				rgb : ghex("714851")
+			RoundedRectangle :
+				pos : self.pos
+				size : self.size
+				radius : [30,]
+		
+		BoxLayout :
+			orientation : "vertical"
+			size_hint : 1 , 0.2
+			
+			TextInput :
+				id : addr
+				hint_text : "Address ex : 127.0.0.1"
+				hint_text_color : ghex("714851")
+				halign : "center"
+				font_name : "wall_font.ttf"
+				size_hint : 1 , 0.5
+				font_size : sp(23)
+				multiline : False
+				text : "127.0.0.1" # Debugging
+			
+			TextInput :
+				id : port
+				hint_text : "Port ex : 9999"
+				hint_text_color : ghex("714851")
+				halign : "center"
+				font_name : "wall_font.ttf"
+				size_hint : 1 , 0.5
+				font_size : sp(23)
+				multiline : False
+				text : "9999" # Debugging
+				
+		Label :
+			id : info
+			text : "Enter Your Nickname"
+			halign : "center"
+			font_name : "wall_font.ttf"
+			color : 1 , 1 , 1
+			font_size : sp(24)
+			size_hint : 1 , 0.4
+		
+		TextInput :
+			id : nickname
+			hint_text : "nickname"
+			hint_text_color : ghex("714851")
+			halign : "center"
+			padding_y : sp(15)
+			font_name : "wall_font.ttf"
+			size_hint : 1 , 0.2
+			font_size : sp(23)
+			multiline : False
+			text :"makieyot" # Debugging
+		
+		Button :
+			id : join_button
+			background_color : 0 , 0 , 0 , 0
+			text : "join in!"
+			font_name : "wall_font.ttf"
+			size_hint : 1 , 0.2
+			color : ghex("c9ccd1")
+			font_size : sp(20)
+			
