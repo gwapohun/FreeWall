@@ -154,6 +154,9 @@ class FreeWallApp(App) :
 		Clock.schedule_once(self.root.registerUser , 1)
 		Clock.schedule_interval( self.check_if_data_exist , 1/60)
 	
+	def build(self) :
+		return MainWidget()
+	
 	def check_if_data_exist(self , dt : int):
 		if not self.root.checkIfRegister() :
 			self.stop()
