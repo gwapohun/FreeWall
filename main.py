@@ -141,7 +141,6 @@ class MainWidget(BoxLayout) :
 		return True
 
 # ===== Free Wall App
-Builder.load_file("list_of_screens.kv")
 kivy.require("2.0.0")
 class FreeWallApp(App) :
 	
@@ -155,6 +154,7 @@ class FreeWallApp(App) :
 		Clock.schedule_interval( self.check_if_data_exist , 1/60)
 	
 	def build(self) :
+		Builder.load_file("list_of_screens.kv")
 		return MainWidget()
 	
 	def check_if_data_exist(self , dt : int):
