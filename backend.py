@@ -10,8 +10,9 @@ import json
 def app_information() :
 	infos = [
 		"\n",
-		"You Must Read It First !\n\n" ,
-		"This App Are Created To Have Fun And To Tell Your Thoughts , It Just Like A Free Wall But In Online.\n" ,
+		"Welcome to the free wall! ",
+		"\n\nThis app aims to help you share your thoughts anonymously. Feel free to say anything you want to say no one will know its you. The wall is your canvas and your thoughts are art.",
+		"\n\nThis App Are Created To Have Fun And To Tell Your Thoughts , It Just Like A Free Wall But In Online.\n" ,
 		"If You Have Any Concern Just Visit Junior Programming Club Or Ask Personally The Developers.\n",
 		"\n",
 		"Developers : \n" ,

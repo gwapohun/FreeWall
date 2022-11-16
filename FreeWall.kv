@@ -1,7 +1,7 @@
 #:import ghex kivy.utils.get_color_from_hex
 #:import list_of_screens list_of_screens
 
-MainWidget:
+<MainWidget>:
 			
 	handler : handler.__self__
 	orientation : "vertical"
@@ -16,7 +16,7 @@ MainWidget:
 					
 		size_hint : 1 , 0.08
 		markup : True
-		font_name : "wall_font.ttf"
+		font_name : "wall_text"
 		font_size : sp(25)
 		text : str(handler.current).upper()
 			
@@ -60,7 +60,6 @@ MainWidget:
 			
 			on_release :
 				if handler.current != "profile" : handler.transition.direction = "left"
-				#if handler.current == "editor" : handler.transition.direction = "right"
 				handler.current = "profile"
 				
 
@@ -73,7 +72,7 @@ MainWidget:
 			pos : self.pos
 			size : self.size
 	
-	font_name : "wall_font.ttf"
+	font_name : "wall_text"
 	font_size : sp(23)
 
 # ===== Sign Up Pop Up
@@ -110,7 +109,7 @@ MainWidget:
 				hint_text : "Address ex : 127.0.0.1"
 				hint_text_color : ghex("714851")
 				halign : "center"
-				font_name : "wall_font.ttf"
+				font_name : "wall_text"
 				size_hint : 1 , 0.5
 				font_size : sp(23)
 				multiline : False
@@ -121,7 +120,7 @@ MainWidget:
 				hint_text : "Port ex : 9999"
 				hint_text_color : ghex("714851")
 				halign : "center"
-				font_name : "wall_font.ttf"
+				font_name : "wall_text"
 				size_hint : 1 , 0.5
 				font_size : sp(23)
 				multiline : False
@@ -131,7 +130,7 @@ MainWidget:
 			id : info
 			text : "Enter Your Nickname"
 			halign : "center"
-			font_name : "wall_font.ttf"
+			font_name : "wall_text"
 			color : 1 , 1 , 1
 			font_size : sp(24)
 			size_hint : 1 , 0.4
@@ -142,7 +141,7 @@ MainWidget:
 			hint_text_color : ghex("714851")
 			halign : "center"
 			padding_y : sp(15)
-			font_name : "wall_font.ttf"
+			font_name : "wall_text"
 			size_hint : 1 , 0.2
 			font_size : sp(23)
 			multiline : False
@@ -152,7 +151,7 @@ MainWidget:
 			id : join_button
 			background_color : 0 , 0 , 0 , 0
 			text : "join in!"
-			font_name : "wall_font.ttf"
+			font_name : "wall_text"
 			size_hint : 1 , 0.2
 			color : ghex("c9ccd1")
 			font_size : sp(20)

@@ -1,12 +1,15 @@
 __version__ = 1.0
 
 import kivy
+kivy.require("2.0.0")
+
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.screenmanager import ScreenManager 
 from kivy.uix.button import Button
 from kivy.uix.modalview import ModalView
 from kivy.clock import Clock
+from kivy.core.text import LabelBase
 
 from kivy.lang.builder import Builder
 from kivy.utils import get_color_from_hex as ghex
@@ -117,6 +120,7 @@ class MainWidget(BoxLayout) :
 		self.signUpPopUp = SignUp()
 		self.signUpPopUp.bind( on_dismiss = self.saveData)
 		self.appDataManager = ManageAppData()
+		Clock.schedule_once(self.registerUser , 1)
 		
 	def registerUser(self , *args) :
 		if not self.appDataManager.data_exist() :
@@ -141,7 +145,6 @@ class MainWidget(BoxLayout) :
 		return True
 
 # ===== Free Wall App
-kivy.require("2.0.0")
 class FreeWallApp(App) :
 	
 	def on_start(self) :
@@ -150,8 +153,8 @@ class FreeWallApp(App) :
 		for need in needs :
 			print(need)
 			#request_permission(permission=need)
-		Clock.schedule_once(self.root.registerUser , 1)
 		Clock.schedule_interval( self.check_if_data_exist , 1/60)
+		
 	
 	def build(self) :
 		Builder.load_file("list_of_screens.kv")
@@ -162,4 +165,6 @@ class FreeWallApp(App) :
 			self.stop()
 		
 	
-FreeWallApp().run()
+if __name__ == "__main__" :
+	LabelBase.register(name="wall_text" , fn_regular="wall_font.ttf")
+	FreeWallApp().run()

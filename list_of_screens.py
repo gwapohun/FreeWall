@@ -123,7 +123,7 @@ class WallViewerButtons(Button) :
 		super(WallViewerButtons , self).__init__(**kwargs)
 		self.background_color = ghex("b0828c")
 		self.background_down = "" #ghex("4f3139")
-		self.font_name = "wall_font.ttf"
+		self.font_name = "wall_text"
 		self.font_size = sp(14)
 		
 	
